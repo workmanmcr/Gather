@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gather.Models
 {
-    public class GatherContext : IdentityDbContext<ApplicationUser>
+    public class GatherContext : IdentityDbContext<User>
     {
         public DbSet<Event> Events { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
-        public DbSet<ApplicationUser> AspNetUsers { get; set; }
+        public DbSet<User> AspNetUsers { get; set; }
         public DbSet<EventUser> EventUsers { get; set; }
         public DbSet<EventActivity> EventActivities { get; set; }
 

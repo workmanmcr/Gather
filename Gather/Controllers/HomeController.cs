@@ -1,18 +1,13 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Gather.Models;
+﻿﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Gather.Controllers;
-
-public class HomeController : Controller
+namespace Gather.Controllers
 {
-
-
-   
-
-    public IActionResult Index()
+  public class HomeController : Controller
+  {
+    [HttpGet("/")]
+    public ActionResult Index()
     {
-        return View();
+      return View();
     }
-
-    }
+  }
+}
