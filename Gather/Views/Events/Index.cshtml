@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+@using Gather.Models
+
+<h1>Events for @User.Identity.Name</h1>
+
+@if (@Model.Count == 0)
+{
+<h3> No Events have been Planned yet. </h3>
+}
+else
+{
+  <ul>
+    @foreach(Event event in Model)
+    {
+      <li>@Html.ActionLink($"{event.Title}", "Details", new { id = event.EventId })</li>
+    }
+  </ul>
+}
+<p>@Html.ActionLink("View Events you are attending", "Eventlist")
+<p>@Html.ActionLink("Create Event", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
