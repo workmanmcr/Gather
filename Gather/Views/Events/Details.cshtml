@@ -1,0 +1,69 @@
+@{
+    Layout = "_Layout";
+}
+
+@using Gather.Models
+@model Gather.Models.Event
+
+<h2>Recipe:</h2>
+
+<hr>
+<h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>this event does not have any guests yet.</p>
+}
+
+else
+{
+  <h4>This Event has the following guets/Vendors:</h4>
+  <ul>
+    @foreach(EventUser join in Model.JoinEntities)
+    {
+            @if (join.User != null)
+{
+      <li>User: @join.User.UserName</li>
+}
+      @using (Html.BeginForm("DeleteUser", "Events"))
+      {
+        @Html.Hidden("joinId", @join.EventUserId)
+        <input type="submit" value="Delete"/>
+      }
+  }
+  </ul>
+}
+
+@if(@Model.JoinVendor.Count == 0)
+{
+  <p>this event does not have any Vendors yet</p>
+}
+else
+{
+  <h4>This Events has the following vendors:</h4>
+  <ul>
+    @foreach(EventVendor join in Model.JoinVendor)
+    {
+        @if (join.Vendor != null)
+        {
+        <li>Tag: @join.Vendor.Title</li>
+        }
+      @using (Html.BeginForm("DeleteVendor", "Events"))
+      {
+        @Html.Hidden("joinId", @join.EventVendorId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+    
+}
+
+<h3>@Html.DisplayNameFor(model => model.About):</h3> 
+<p>@Html.DisplayFor(model => model.About)</p>
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+@* <p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.EventId })</p>
+<p>@Html.ActionLink("Add a Vendor", "AddVendor", new { id = Model.EventId})</p>
+<p>@Html.ActionLink("Add a Activity", "AddActivity", new { id = Model.EventId })</p> *@
+<p>@Html.ActionLink("Edit Event", "Edit", new { id = Model.EventId })</p>
+<p>@Html.ActionLink("Delete Event", "Delete", new { id = Model.EventId })</p>
