@@ -48,9 +48,9 @@ else
         {
         <li>Tag: @join.Vendor.Title</li>
         }
-      @using (Html.BeginForm("DeleteTag", "Recipes"))
+      @using (Html.BeginForm("DeleteVendor", "Events"))
       {
-        @Html.Hidden("joinId", @join.RecipeTagId)
+        @Html.Hidden("joinId", @join.EventVendorId)
         <input type="submit" value="Delete"/>
       }
     }
@@ -58,12 +58,11 @@ else
     
 }
 
-<h3>@Html.DisplayNameFor(model => model.Instruction):</h3> 
-<p>@Html.DisplayFor(model => model.Instruction)</p>
+<h3>@Html.DisplayNameFor(model => model.About):</h3> 
+<p>@Html.DisplayFor(model => model.About)</p>
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add an Ingredient", "AddIngredient", new { id = Model.RecipeId })</p>
-<p>@Html.ActionLink("Add Tag", "AddTag", new { id = Model.RecipeId})</p>
-<p>@Html.ActionLink("Add User", "AddUser", new { id = Model.RecipeId})</p>
-<p>@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId })</p>
-<p>@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
+<p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.EventId })</p>
+<p>@Html.ActionLink("Add a Vendor", "AddVendor", new { id = Model.EventId})</p>
+<p>@Html.ActionLink("Edit Event", "Edit", new { id = Model.EventId })</p>
+<p>@Html.ActionLink("Delete Event", "Delete", new { id = Model.EventId })</p>
