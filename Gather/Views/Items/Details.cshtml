@@ -1,3 +1,17 @@
 @{
-    Layout = "_Layout";
+  Layout = "_Layout";
 }
+
+@using Gather.Models
+@model Gather.Models.Item
+
+<h2>Item Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.ItemName): @Html.DisplayFor(model => model.ItemName)</h3>  
+
+  </ul>
+
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.ItemId })</p>
+<p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</p>
