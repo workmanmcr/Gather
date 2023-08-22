@@ -12,9 +12,9 @@
 else
 {
   <ul>
-    @foreach(Event event in Model)
+    @foreach(Event e in Model)
     {
-      <li>@Html.ActionLink($"{event.Title}", "Details", new { id = event.EventId })</li>
+      <li>@Html.ActionLink($"{e.Title}", "Details", new { id = e.EventId })</li>
     }
   </ul>
 }
