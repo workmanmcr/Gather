@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Gather.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
+
 
 #nullable disable
 namespace Gather.Controllers
@@ -10,10 +13,12 @@ namespace Gather.Controllers
     public class GatheringsController : Controller
     {
         private readonly GatherContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public GatheringsController(GatherContext db)
+        public GatheringsController(UserManager<ApplicationUser> userManager, GatherContext db)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         public ActionResult Index()
@@ -45,7 +50,7 @@ namespace Gather.Controllers
         public ActionResult AddGuest(int id)
         {
             Gathering thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
-            ViewBag.UserId = new SelectList(_db.Users, "UserId", "UserName");
+            ViewBag.ApplicationUserId = new SelectList(_db.Users, "ApplicationUserId");
             return View(thisGathering);
         }
 
@@ -104,6 +109,26 @@ namespace Gather.Controllers
             _db.GatheringVendors.Remove(joinEntry);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult AddGatheringItem(int id)
+        {
+            var thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
+            ViewBag.ItemId = new SelectList(_db.GatheringItems, "GatheringItemId", "GatheringItemName");
+            return View(thisGathering);
+        }
+
+        [HttpPost]
+        public ActionResult AddGatheringItem(Gathering gathering, int itemId)
+        {
+        #nullable enable
+            GatheringItems? joinEntity = _db.GatheringItems.FirstOrDefault(join => (join.ItemId == itemId && join.GatheringId == gathering.GatheringId));
+            #nullable disable
+            if (joinEntity == null && itemId != 0)
+            {
+                _db.GatheringItems.Add(new GatheringItems() { ItemId = itemId, GatheringId = gathering.GatheringId });
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = gathering.GatheringId });
         }
 
 
