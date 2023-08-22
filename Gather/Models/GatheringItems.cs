@@ -1,8 +1,8 @@
 namespace Gather.Models
 {
-    public class GatheringItems
+    public class GatheringItem
     {
-        public int GatheringItemsId { get; set; }
+        public int GatheringItemId { get; set; }
         public Gathering Gathering { get; set; }
         public int GatheringId { get; set; }
         public Item Item { get; set; }

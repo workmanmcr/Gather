@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Gather.Models;
 using System.Threading.Tasks;
 using Gather.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Gather.Controllers
 {
@@ -86,6 +88,27 @@ namespace Gather.Controllers
     public async Task<ActionResult> LogOff()
     {
       await _signInManager.SignOutAsync();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddItem(string id)
+    {
+      ApplicationUser thisUser = _db.AspNetUsers.FirstOrDefault(user => user.Id == id);
+      ViewBag.ItemId = new SelectList(_db.Items, "ItemId", "ItemName");
+      return View(thisUser);
+    }
+
+    [HttpPost]
+    public ActionResult AddItem(ApplicationUser user, int itemId)
+    {
+#nullable enable
+      GuestItem? joinEntity = _db.GuestItems.FirstOrDefault(join => join.ItemId == itemId && join.UserId == user.Id);
+#nullable disable
+      if (joinEntity == null && itemId != 0)
+      {
+        _db.GuestItems.Add(new GuestItem() { ItemId = itemId, UserId = user.Id });
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
   }
