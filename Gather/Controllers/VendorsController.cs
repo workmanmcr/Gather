@@ -78,11 +78,11 @@ namespace Gather.Controllers
     public ActionResult AddVendorItem(Vendor vendor, int itemId)
     {
 #nullable enable
-      VendorItems? joinEntity = _db.VendorItems.FirstOrDefault(join => (join.ItemId == itemId && join.VendorId == vendor.VendorId));
+      VendorItem? joinEntity = _db.VendorItems.FirstOrDefault(join => (join.ItemId == itemId && join.VendorId == vendor.VendorId));
 #nullable disable
       if (joinEntity == null && itemId != 0)
       {
-        _db.VendorItems.Add(new VendorItems() { ItemId = itemId, VendorId = vendor.VendorId });
+        _db.VendorItems.Add(new VendorItem() { ItemId = itemId, VendorId = vendor.VendorId });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = vendor.VendorId });
@@ -109,7 +109,7 @@ namespace Gather.Controllers
 
     public ActionResult DeleteItem(int joinId)
     {
-      VendorItems joinEntry = _db.VendorItems.FirstOrDefault(entry => entry.ItemId == joinId);
+      VendorItem joinEntry = _db.VendorItems.FirstOrDefault(entry => entry.ItemId == joinId);
       _db.VendorItems.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = joinEntry.VendorId });

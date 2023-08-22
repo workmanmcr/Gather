@@ -1,3 +1,19 @@
 @{
     Layout = "_Layout";
 }
+
+@model Gather.Models.Vendor
+
+<h4>Add your vendor!</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.VendorName)
+    @Html.TextBoxFor(model => model.VendorName)
+
+    @Html.LabelFor(model => model.About)
+    @Html.TextAreaFor(model => model.About, new { cols=80, rows=10 })
+
+    <input type="submit" value="add new vendor" />
+}
+
+<p>@Html.ActionLink("Show all vendors", "Index")</p>

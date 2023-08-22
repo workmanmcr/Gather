@@ -1,8 +1,8 @@
 namespace Gather.Models
 {
-    public class VendorItems
+    public class VendorItem
     {
-        public int VendorItemsId { get; set; }
+        public int VendorItemId { get; set; }
         public Vendor Vendor { get; set; }
         public int VendorId { get; set; }
         public Item Item { get; set; }

@@ -19,7 +19,7 @@ namespace Gather.Models
         public DbSet<GatheringVendor> GatheringVendors { get; set; }
         public DbSet<UserVendor> UserVendors { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
-        public DbSet<VendorItems> VendorItems { get; set; }
+        public DbSet<VendorItem> VendorItems { get; set; }
         public DbSet<GuestItems> GuestItems { get; set; }
         public DbSet<GatheringItems> GatheringItems { get; set; }
 
