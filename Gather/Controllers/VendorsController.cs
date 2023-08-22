@@ -24,8 +24,8 @@ namespace Gather.Controllers
 
     public ActionResult Create()
     {
-        ViewBag.GatheringId = new SelectList(_db.Gatherings, "GatheringId", "Title");
-    return View();
+      ViewBag.GatheringId = new SelectList(_db.Gatherings, "GatheringId", "Title");
+      return View();
     }
 
     [HttpPost]
@@ -33,7 +33,7 @@ namespace Gather.Controllers
     {
       _db.Vendors.Add(vendor);
       _db.SaveChanges();
-      if (GatheringId !=0)
+      if (GatheringId != 0)
       {
         _db.GatheringVendors.Add(new GatheringVendor() { GatheringId = GatheringId, VendorId = vendor.VendorId });
       }
@@ -41,15 +41,15 @@ namespace Gather.Controllers
       return RedirectToAction("Index");
     }
 
-  public ActionResult Details(int id)
-{
-    var thisVendor = _db.Vendors
-        .Include(vendor => vendor.JoinEntities)
-            .ThenInclude(join => join.Gathering) 
-        .FirstOrDefault(vendor => vendor.VendorId == id);
+    public ActionResult Details(int id)
+    {
+      var thisVendor = _db.Vendors
+          .Include(vendor => vendor.GatheringVendors)
+              .ThenInclude(join => join.Gathering)
+          .FirstOrDefault(vendor => vendor.VendorId == id);
 
-    return View(thisVendor);
-}
+      return View(thisVendor);
+    }
 
 
     public ActionResult Edit(int id)
@@ -60,33 +60,34 @@ namespace Gather.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit (Vendor vendor)
+    public ActionResult Edit(Vendor vendor)
     {
       _db.Entry(vendor).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Details", new {id = vendor.VendorId });
+      return RedirectToAction("Details", new { id = vendor.VendorId });
     }
 
-     public ActionResult AddItem(int id)
+    public ActionResult AddVendorItem(int id)
     {
       var thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
-      ViewBag.ItemId = new SelectList(_db.VendorItems, "VendorItemId", "VendoItemName");
+      ViewBag.ItemId = new SelectList(_db.VendorItems, "VendorItemId", "VendorItemName");
       return View(thisVendor);
     }
-    
+
     [HttpPost]
-    public ActionResult AddVendorItem(Vendor vendor, int vendorItemId)
+    public ActionResult AddVendorItem(Vendor vendor, int itemId)
     {
-      VendorsItems? joinEntity = _db.VendorsItems.FirstOrDefault(join => (join.TagId == vendorItemId && join.VendorId == vendor.VendorId));
+#nullable enable
+      VendorItems? joinEntity = _db.VendorItems.FirstOrDefault(join => (join.ItemId == itemId && join.VendorId == vendor.VendorId));
 #nullable disable
-            if (joinEntity == null && vendorItemId != 0)
-            {
-                _db.VendorsItems.Add(new VendorsItems() { VendorItemId = vendorItemId, VendorId = vendor.VendorId });
-                _db.SaveChanges();
-            }
-            return RedirectToAction("Details", new { id = vendor.VendorId });
+      if (joinEntity == null && itemId != 0)
+      {
+        _db.VendorItems.Add(new VendorItems() { ItemId = itemId, VendorId = vendor.VendorId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = vendor.VendorId });
     }
-    
+
 
     public ActionResult Delete(int id)
     {
@@ -108,7 +109,7 @@ namespace Gather.Controllers
 
     public ActionResult DeleteItem(int joinId)
     {
-      var joinEntry = _db.VendorItems.FirstOrDefault(entry => entry.VendorItemId == joinId);
+      VendorItems joinEntry = _db.VendorItems.FirstOrDefault(entry => entry.ItemId == joinId);
       _db.VendorItems.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = joinEntry.VendorId });

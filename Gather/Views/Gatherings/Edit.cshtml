@@ -1,0 +1,29 @@
+@{
+    Layout = "_Layout";
+}
+
+@using Gather.Models
+@model Gather.Models.Gathering
+
+<h2>Edit gathering: @Html.DisplayFor(model => model.Title)</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.GatheringId)
+
+    @Html.LabelFor(model => model.Title)
+    @Html.TextBoxFor(model => model.Title)
+
+    @Html.LabelFor(model => model.TimeDate)
+    @Html.EditorFor(model => model.TimeDate)
+
+    @Html.LabelFor(model => model.Location)
+    @Html.TextBoxFor(model => model.Location)
+
+    @Html.LabelFor(model => model.About)
+    @Html.TextBoxFor(model => model.About)
+
+    <input type="submit" value="Save" />
+}
+<p>@Html.ActionLink("Show all Gatherings", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
