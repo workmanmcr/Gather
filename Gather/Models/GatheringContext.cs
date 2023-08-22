@@ -20,8 +20,8 @@ namespace Gather.Models
         public DbSet<UserVendor> UserVendors { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
         public DbSet<VendorItem> VendorItems { get; set; }
-        public DbSet<GuestItems> GuestItems { get; set; }
-        public DbSet<GatheringItems> GatheringItems { get; set; }
+        public DbSet<GuestItem> GuestItems { get; set; }
+        public DbSet<GatheringItem> GatheringItems { get; set; }
 
         public GatherContext(DbContextOptions options) : base(options) { }
     }

@@ -3,6 +3,7 @@ using System;
 using Gather.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gather.Migrations
 {
     [DbContext(typeof(GatherContext))]
-    partial class GatherContextModelSnapshot : ModelSnapshot
+    [Migration("20230822222805_NameChanges")]
+    partial class NameChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,13 +111,10 @@ namespace Gather.Migrations
                     b.Property<int>("About")
                         .HasColumnType("int");
 
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
-
                     b.Property<string>("Location")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Time")
+                    b.Property<int>("TimeDate")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")

@@ -1,11 +1,13 @@
 @{
-  Layout= "_Layout";
+  Layout = "_Layout";
 }
 
 @model Gather.Models.Gathering;
 
+<< HEAD
 <h2>Add Item</h2>
 <h4>Add Items to this Gathering: @Html.DisplayFor(model => model.Title)</h4>
+
 
 @using (Html.BeginForm())
 {
@@ -14,6 +16,7 @@
   @Html.Label("Select Item")
   @Html.DropDownList("GatheringItemId")
   <input type="submit" value="Save"/>
+
 }
 
-<p>@Html.ActionLink("Back to  Gatherings", "Index")</p>
+<p>@Html.ActionLink("Back to Gatherings", "Index")</p>

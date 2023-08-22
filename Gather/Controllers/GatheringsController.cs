@@ -154,11 +154,11 @@ namespace Gather.Controllers
         public ActionResult AddGatheringItem(Gathering gathering, int itemId)
         {
 #nullable enable
-            GatheringItems? joinEntity = _db.GatheringItems.FirstOrDefault(join => (join.ItemId == itemId && join.GatheringId == gathering.GatheringId));
+            GatheringItem? joinEntity = _db.GatheringItems.FirstOrDefault(join => (join.ItemId == itemId && join.GatheringId == gathering.GatheringId));
 #nullable disable
             if (joinEntity == null && itemId != 0)
             {
-                _db.GatheringItems.Add(new GatheringItems() { ItemId = itemId, GatheringId = gathering.GatheringId });
+                _db.GatheringItems.Add(new GatheringItem() { ItemId = itemId, GatheringId = gathering.GatheringId });
                 _db.SaveChanges();
             }
             return RedirectToAction("Details", new { id = gathering.GatheringId });

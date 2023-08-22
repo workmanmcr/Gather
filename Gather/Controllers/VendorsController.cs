@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Gather.Controllers
 {
-  public class VendorController : Controller
+  public class VendorsController : Controller
   {
     private readonly GatherContext _db;
 
-    public VendorController(GatherContext db)
+    public VendorsController(GatherContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      IEnumerable<Vendor> sortedVendors = _db.Vendors.OrderBy(machine => machine.VendorName);
-      return View(sortedVendors.ToList());
+      List<Vendor> model = _db.Vendors.ToList();
+      return View(model);
     }
 
     public ActionResult Create()
@@ -67,15 +67,15 @@ namespace Gather.Controllers
       return RedirectToAction("Details", new { id = vendor.VendorId });
     }
 
-    public ActionResult AddVendorItem(int id)
+    public ActionResult AddItem(int id)
     {
       var thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
-      ViewBag.ItemId = new SelectList(_db.VendorItems, "VendorItemId", "VendorItemName");
+      ViewBag.ItemId = new SelectList(_db.Items, "ItemId", "ItemName");
       return View(thisVendor);
     }
 
     [HttpPost]
-    public ActionResult AddVendorItem(Vendor vendor, int itemId)
+    public ActionResult AddItem(Vendor vendor, int itemId)
     {
 #nullable enable
       VendorItem? joinEntity = _db.VendorItems.FirstOrDefault(join => (join.ItemId == itemId && join.VendorId == vendor.VendorId));

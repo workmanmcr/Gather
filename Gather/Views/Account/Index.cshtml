@@ -9,6 +9,7 @@
   <p>Hello @User.Identity.Name!</p>
   @using (Html.BeginForm("LogOff", "Account"))
   {
+    <p>@Html.ActionLink("Add Item", "AddItem")</p>
     <input type="submit" class="btn btn-primary" value="Log out" />
   }
 }
