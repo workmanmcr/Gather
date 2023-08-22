@@ -5,8 +5,7 @@ namespace Gather.ViewModels
     {
         public List<Gathering> GatheringResults { get; set; }
         public List<Activity> ActivityResults { get; set; }
-        public List<VendorItem> VendorItemResults { get; set; }
-        public List<GuestItem> UserItemResults { get; set; }
+        public List<Item> ItemResults { get; set; }
         public List<Vendor> VendorResults { get; set; }
     }
 }
