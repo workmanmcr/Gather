@@ -9,10 +9,10 @@ namespace Gather.Controllers
   public class AccountController : Controller
   {
     private readonly GatherContext _db;
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, GatherContext db)
+    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, GatherContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
@@ -38,7 +38,7 @@ namespace Gather.Controllers
       }
       else
       {
-        User user = new User { UserName = model.Email };
+        ApplicationUser user = new ApplicationUser { UserName = model.Email };
         IdentityResult result = await _userManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {

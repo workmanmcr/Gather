@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Authorization;
 #nullable disable
 namespace Gather.Controllers
 {
-    public class ItemsController : Controller
+    public class GuestItemsController : Controller
     {
         private readonly GatherContext _db;
 
-        public ItemsController(GatherContext db)
+        public GuestItemsController(GatherContext db)
         {
             _db = db;
         }
 
         public ActionResult Index()
         {
-            List<Item> model = _db.Items.ToList();
+            List<GuestItem> model = _db.GuestItems.ToList();
             return View(model);
         }
 
@@ -27,30 +27,30 @@ namespace Gather.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Item e)
+        public ActionResult Create(GuestItem i)
         {
-            _db.Items.Add(e);
+            _db.GuestItems.Add(i);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)
         {
-            Item thisItem = _db.Items.FirstOrDefault(e => e.ItemId == id);
-            return View(thisItem);
+            GuestItem thisGuestItem = _db.GuestItems.FirstOrDefault(e => e.GuestItemId == id);
+            return View(thisGuestItem);
         }
 
         [Authorize]
         public ActionResult Edit(int id)
         {
-            Item thisItem = _db.Items.FirstOrDefault(a => a.ItemId == id);
-            return View(thisItem);
+            GuestItem thisGuestItem = _db.GuestItems.FirstOrDefault(a => a.GuestItemId == id);
+            return View(thisGuestItem);
         }
 
         [HttpPost]
-        public ActionResult Edit(Item e)
+        public ActionResult Edit(GuestItem e)
         {
-            _db.Items.Update(e);
+            _db.GuestItems.Update(e);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -58,15 +58,15 @@ namespace Gather.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
-            Item thisItem = _db.Items.FirstOrDefault(a => a.ItemId == id);
-            return View(thisItem);
+            GuestItem thisGuestItem = _db.GuestItems.FirstOrDefault(a => a.GuestItemId == id);
+            return View(thisGuestItem);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Item thisItem = _db.Items.FirstOrDefault(a => a.ItemId == id);
-            _db.Items.Remove(thisItem);
+            GuestItem thisGuestItem = _db.GuestItems.FirstOrDefault(a => a.GuestItemId == id);
+            _db.GuestItems.Remove(thisGuestItem);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
