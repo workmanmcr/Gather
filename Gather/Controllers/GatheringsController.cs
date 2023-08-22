@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Authorization;
 #nullable disable
 namespace Gather.Controllers
 {
-    public class EventsController : Controller
+    public class GatheringsController : Controller
     {
         private readonly GatherContext _db;
 
-        public EventsController(GatherContext db)
+        public GatheringsController(GatherContext db)
         {
             _db = db;
         }
 
         public ActionResult Index()
         {
-            List<Event> model = _db.Events.ToList();
+            List<Gathering> model = _db.Gatherings.ToList();
             return View(model);
         }
 
@@ -27,30 +27,30 @@ namespace Gather.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Event e)
+        public ActionResult Create(Gathering g)
         {
-            _db.Events.Add(e);
+            _db.Gatherings.Add(g);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)
         {
-            Event thisEvent = _db.Events.FirstOrDefault(e => e.EventId == id);
-            return View(thisEvent);
+            Gathering thisGathering = _db.Gatherings.FirstOrDefault(g => g.GatheringId == id);
+            return View(thisGathering);
         }
 
         [Authorize]
         public ActionResult Edit(int id)
         {
-            Event thisEvent = _db.Events.FirstOrDefault(a => a.EventId == id);
-            return View(thisEvent);
+            Gathering thisGathering = _db.Gatherings.FirstOrDefault(a => a.GatheringId == id);
+            return View(thisGathering);
         }
 
         [HttpPost]
-        public ActionResult Edit(Event e)
+        public ActionResult Edit(Gathering g)
         {
-            _db.Events.Update(e);
+            _db.Gatherings.Update(g);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -58,15 +58,15 @@ namespace Gather.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
-            Event thisEvent = _db.Events.FirstOrDefault(a => a.EventId == id);
-            return View(thisEvent);
+            Gathering thisGathering = _db.Gatherings.FirstOrDefault(a => a.GatheringId == id);
+            return View(thisGathering);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event thisEvent = _db.Events.FirstOrDefault(a => a.EventId == id);
-            _db.Events.Remove(thisEvent);
+            Gathering thisGathering = _db.Gatherings.FirstOrDefault(a => a.GatheringId == id);
+            _db.Gatherings.Remove(thisGathering);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }

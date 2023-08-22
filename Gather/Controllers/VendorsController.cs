@@ -24,18 +24,18 @@ namespace Gather.Controllers
 
     public ActionResult Create()
     {
-        ViewBag.EventId = new SelectList(_db.Events, "EventId", "Title");
+        ViewBag.GatheringId = new SelectList(_db.Gatherings, "GatheringId", "Title");
     return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Vendor vendor, int EventId)
+    public ActionResult Create(Vendor vendor, int GatheringId)
     {
       _db.Vendors.Add(vendor);
       _db.SaveChanges();
-      if (EventId !=0)
+      if (GatheringId !=0)
       {
-        _db.EventVendors.Add(new EventVendor() { EventId = EventId, VendorId = vendor.VendorId });
+        _db.GatheringVendors.Add(new GatheringVendor() { GatheringId = GatheringId, VendorId = vendor.VendorId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -45,7 +45,7 @@ namespace Gather.Controllers
 {
     var thisVendor = _db.Vendors
         .Include(vendor => vendor.JoinEntities)
-            .ThenInclude(join => join.Event) 
+            .ThenInclude(join => join.Gathering) 
         .FirstOrDefault(vendor => vendor.VendorId == id);
 
     return View(thisVendor);
@@ -54,7 +54,7 @@ namespace Gather.Controllers
 
     public ActionResult Edit(int id)
     {
-      ViewBag.EventId = new SelectList(_db.Events, "EventId", "Title");
+      ViewBag.GatheringId = new SelectList(_db.Gatherings, "GatheringId", "Title");
       Vendor thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
       return View(thisVendor);
     }
@@ -70,19 +70,21 @@ namespace Gather.Controllers
      public ActionResult AddItem(int id)
     {
       var thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
-      ViewBag.ItemId = new SelectList(_db.Items, "ItemId", "ItemName");
+      ViewBag.ItemId = new SelectList(_db.VendorItems, "VendorItemId", "VendoItemName");
       return View(thisVendor);
     }
     
     [HttpPost]
-    public ActionResult AddItem(Vendor Vendor, int ItemId)
+    public ActionResult AddVendorItem(Vendor vendor, int vendorItemId)
     {
-      if (ItemId != 0)
-      {
-        _db.VendorItems.Add(new VendorItem() { ItemId = ItemId, VendorId = vendor.VendorId });
-        _db.SaveChanges();
-      }
-      return RedirectToAction("Index");
+      VendorsItems? joinEntity = _db.VendorsItems.FirstOrDefault(join => (join.TagId == vendorItemId && join.VendorId == vendor.VendorId));
+#nullable disable
+            if (joinEntity == null && vendorItemId != 0)
+            {
+                _db.VendorsItems.Add(new VendorsItems() { VendorItemId = vendorItemId, VendorId = vendor.VendorId });
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = vendor.VendorId });
     }
     
 

@@ -9,5 +9,8 @@ namespace Gather.Models
   {
     public int VendorItemId { get; set; }
     public string VendorItemName { get; set; }
+
+    public Vendor Vendor { get; set; }
+     public int VendorId { get; set; }
   }
 }

@@ -23,7 +23,7 @@ namespace Gather
                         )
                       );
 
-      builder.Services.AddIdentity<User, IdentityRole>()
+      builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                .AddEntityFrameworkStores<GatherContext>()
                .AddDefaultTokenProviders();
 
