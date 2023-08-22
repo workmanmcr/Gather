@@ -1,24 +1,24 @@
 @{
-        Layout = "_Layout";
-      }
+  Layout = "_Layout";
+}
 
-      @model Gather.Models.Gathering
+@model Gather.Models.Gathering
 
-      <h4>Add your recipe!</h4>
-      @using (Html.BeginForm())
-      {
-          @Html.LabelFor(model => model.Title)
-          @Html.TextBoxFor(model => model.Title)
+<h4>Add your gathering!</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Title)
+  @Html.TextBoxFor(model => model.Title)
 
-          @Html.LabelFor(model => model.TimeDate)
-          @Html.EditorFor(model => model.TimeDate)
+  @Html.LabelFor(model => model.TimeDate)
+  @Html.EditorFor(model => model.TimeDate)
 
-          @Html.LabelFor(model => model.Location)
-          @Html.TextBoxFor(model => model.Location)
+  @Html.LabelFor(model => model.Location)
+  @Html.TextBoxFor(model => model.Location)
 
-          @Html.LabelFor(model => model.About)
-          @Html.TextBoxFor(model => model.About)
+  @Html.LabelFor(model => model.About)
+  @Html.TextBoxFor(model => model.About)
 
-          <input type="submit" value="add new gathering" />
-      }
-      <p>@Html.ActionLink("Show all gatherings", "Index")</p>
+  <input type="submit" value="add new gathering" />
+}
+<p>@Html.ActionLink("Show all gatherings", "Index")</p>
