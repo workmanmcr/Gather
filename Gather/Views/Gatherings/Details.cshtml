@@ -17,15 +17,15 @@
 
 else
 {
-  <h4>This Gathering has the following guests:</h4>
+  <h4>This Gathering has the following guets/</h4>
   <ul>
     @foreach (GatheringUser join in Model.GatheringUsers)
     {
       @if (join.User != null)
       {
-        <li>User: @join.User.UserName</li>
+        <li>User: @join.User.NormalizedUserName</li>
       }
-      @using (Html.BeginForm("RemoveGuest", "Gatherings"))
+      @using (Html.BeginForm("DeleteUser", "Gatherings"))
       {
         @Html.Hidden("joinId", @join.GatheringUserId)
         <input type="submit" value="Delete" />
