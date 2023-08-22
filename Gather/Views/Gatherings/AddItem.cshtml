@@ -4,15 +4,15 @@
 
 @model Gather.Models.Gathering;
 
-<h2>Add Guests</h2>
-<h4>Add Guests to this Gathering: @Html.DisplayFor(model => model.Title)</h4>
+<h2>Add Item</h2>
+<h4>Add Items to this Gathering: @Html.DisplayFor(model => model.Title)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.GatheringId)
 
-  @Html.Label("Select Vendor")
-  @Html.DropDownList("VendorId")
+  @Html.Label("Select Item")
+  @Html.DropDownList("GatheringItemId")
   <input type="submit" value="Save"/>
 }
 
