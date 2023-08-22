@@ -10,7 +10,7 @@ namespace Gather.Models
     public int ItemId { get; set; }
     public string ItemName { get; set; }
     public List<VendorItem> VendorItems { get; }
-    public List<GuestItems> GuestItems { get; }
-    public List<GatheringItems> GatheringItems { get; }
+    public List<GuestItem> GuestItems { get; }
+    public List<GatheringItem> GatheringItems { get; }
   }
 }

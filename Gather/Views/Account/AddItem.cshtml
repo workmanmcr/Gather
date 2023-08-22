@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Gather.Models.ApplicationUser
+
+<h2>Add Items</h2>
+<h4>@Html.DisplayFor(model => model.UserName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.Id)
+
+  @Html.Label("Select Item")
+  @Html.DropDownList("ItemId")
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to Account", "Index")</p>
