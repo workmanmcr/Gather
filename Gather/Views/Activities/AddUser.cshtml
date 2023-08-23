@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Gather.Models.Activity;
+
+<h2>Add user</h2>
+<h4>Add user to this Activity: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ActivityId)
+
+  @Html.Label("Select User")
+  @Html.DropDownList("UserId")
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to Vendors", "Index")</p>
