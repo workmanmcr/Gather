@@ -11,75 +11,93 @@
 <h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
 
 @if (@Model.GatheringUsers.Count == 0)
+
 {
-  <p>this gathering does not have any guests yet.</p>
+    <p>this gathering does not have any guests yet.</p>
 }
 
+
+
 else
+
 {
-  <h4>This Gathering has the following guests:</h4>
-  <ul>
+    <h4>This Gathering has the following guests:</h4>
+    <ul>
     @foreach (GatheringUser join in Model.GatheringUsers)
+
     {
-      <li>User: @join.User</li>
+          <li>User: @join.User</li>
 
       @using (Html.BeginForm("RemoveGuest", "Gatherings"))
+
       {
         @Html.Hidden("joinId", @join.GatheringUserId)
-        <input type="submit" value="Delete" />
+              <input type="submit" value="Remove" />
       }
     }
-  </ul>
+    </ul>
 }
 
 <hr>
 
 @if (@Model.GatheringVendors.Count == 0)
+
 {
-  <p>this gathering does not have any Vendors yet</p>
+    <p>this gathering does not have any Vendors yet</p>
 }
+
 else
+
 {
-  <h4>This Gatherings has the following vendors:</h4>
-  <ul>
+    <h4>This Gatherings has the following vendors:</h4>
+    <ul>
     @foreach (GatheringVendor join in Model.GatheringVendors)
+
     {
       @if (join.Vendor != null)
+
       {
-        <li>Vendor: @join.Vendor.VendorName</li>
+              <li>Vendor: @join.Vendor.VendorName</li>
       }
-      @using (Html.BeginForm("DeleteVendor", "Gatherings"))
+      @using (Html.BeginForm("RemoveVendor", "Gatherings"))
+
       {
         @Html.Hidden("joinId", @join.GatheringVendorId)
-        <input type="submit" value="Delete" />
+              <input type="submit" value="Delete" />
       }
     }
-  </ul>
+    </ul>
 }
 
 <hr>
 
 @if (@Model.GatheringItems.Count == 0)
+
 {
-  <p>This gathering does not have any items yet.</p>
+    <p>This gathering does not have any items yet.</p>
 }
+
 else
+
 {
-  <h4>This Gatherings has the following items:</h4>
-  <ul>
+    <h4>This Gatherings has the following items:</h4>
+    <ul>
     @foreach (GatheringItem join in Model.GatheringItems)
+
     {
       @if (join.Item != null)
+
       {
-        <li>Tag: @join.Item.ItemName</li>
+              <li>Tag: @join.Item.ItemName</li>
       }
       @using (Html.BeginForm("DeleteItem", "Gatherings"))
+
       {
         @Html.Hidden("joinId", @join.GatheringItemId)
-        <input type="submit" value="Delete" />
+              <input type="submit" value="Delete" />
       }
     }
-  </ul>
+    </ul>
 }
 
 <h3>@Html.DisplayNameFor(model => model.About):</h3>

@@ -7,5 +7,6 @@ namespace Gather.Models
         public int VendorId { get; set; }
         public Item Item { get; set; }
         public int ItemId { get; set; }
+        
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gather.Migrations
 {
-    public partial class GuestItems : Migration
+    public partial class Initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,7 +94,8 @@ namespace Gather.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Location = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TimeDate = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<int>(type: "int", nullable: false),
+                    Time = table.Column<int>(type: "int", nullable: false),
                     About = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -349,14 +350,14 @@ namespace Gather.Migrations
                 name: "GatheringItems",
                 columns: table => new
                 {
-                    GatheringItemsId = table.Column<int>(type: "int", nullable: false)
+                    GatheringItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     GatheringId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GatheringItems", x => x.GatheringItemsId);
+                    table.PrimaryKey("PK_GatheringItems", x => x.GatheringItemId);
                     table.ForeignKey(
                         name: "FK_GatheringItems_Gatherings_GatheringId",
                         column: x => x.GatheringId,
@@ -376,19 +377,18 @@ namespace Gather.Migrations
                 name: "GuestItems",
                 columns: table => new
                 {
-                    GuestItemsId = table.Column<int>(type: "int", nullable: false)
+                    GuestItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId1 = table.Column<string>(type: "varchar(255)", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GuestItems", x => x.GuestItemsId);
+                    table.PrimaryKey("PK_GuestItems", x => x.GuestItemId);
                     table.ForeignKey(
-                        name: "FK_GuestItems_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_GuestItems_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -459,14 +459,14 @@ namespace Gather.Migrations
                 name: "VendorItems",
                 columns: table => new
                 {
-                    VendorItemsId = table.Column<int>(type: "int", nullable: false)
+                    VendorItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     VendorId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VendorItems", x => x.VendorItemsId);
+                    table.PrimaryKey("PK_VendorItems", x => x.VendorItemId);
                     table.ForeignKey(
                         name: "FK_VendorItems_Items_ItemId",
                         column: x => x.ItemId,
@@ -565,9 +565,9 @@ namespace Gather.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GuestItems_UserId1",
+                name: "IX_GuestItems_UserId",
                 table: "GuestItems",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserActivities_ActivityId",
