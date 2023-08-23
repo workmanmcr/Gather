@@ -43,7 +43,7 @@ namespace Gather.Controllers
 
         public ActionResult Details(int id)
         {
-            Gathering thisGathering = _db.Gatherings.Include(gathering => gathering.GatheringUsers).ThenInclude(join => join.User).Include(gathering => gathering.GatheringVendors).ThenInclude(join => join.Vendor).FirstOrDefault(g => g.GatheringId == id);
+            Gathering thisGathering = _db.Gatherings.Include(gathering => gathering.GatheringUsers).ThenInclude(join => join.User).Include(gathering => gathering.GatheringVendors).ThenInclude(join => join.Vendor).Include(gathering => gathering.GatheringItems).ThenInclude(join => join.Item).FirstOrDefault(g => g.GatheringId == id);
             return View(thisGathering);
         }
         [Authorize]
@@ -110,15 +110,17 @@ namespace Gather.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult AddGatheringItem(int id)
+
+        [Authorize]
+        public ActionResult AddItem(int id)
         {
-            var thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
-            ViewBag.ItemId = new SelectList(_db.GatheringItems, "GatheringItemId", "GatheringItemName");
+            Gathering thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
+            ViewBag.ItemId = new SelectList(_db.Items, "ItemId", "ItemName");
             return View(thisGathering);
         }
 
         [HttpPost]
-        public ActionResult AddGatheringItem(Gathering gathering, int itemId)
+        public ActionResult AddItem(Gathering gathering, int itemId)
         {
 #nullable enable
             GatheringItem? joinEntity = _db.GatheringItems.FirstOrDefault(join => (join.ItemId == itemId && join.GatheringId == gathering.GatheringId));
@@ -131,7 +133,27 @@ namespace Gather.Controllers
             return RedirectToAction("Details", new { id = gathering.GatheringId });
         }
 
+        [Authorize]
+        public ActionResult AddActivity(int id)
+        {
+            Gathering thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
+            ViewBag.ActivityId = new SelectList(_db.Activities, "ActivityId", "ActivityName");
+            return View(thisGathering);
+        }
 
+        [HttpPost]
+        public ActionResult AddActivity(Gathering gathering, int activityId)
+        {
+#nullable enable
+            GatheringActivity? joinEntity = _db.GatheringActivities.FirstOrDefault(join => (join.ActivityId == activityId && join.GatheringId == gathering.GatheringId));
+#nullable disable
+            if (joinEntity == null && activityId != 0)
+            {
+                _db.GatheringActivities.Add(new GatheringActivity() { ActivityId = activityId, GatheringId = gathering.GatheringId });
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = gathering.GatheringId });
+        }
 
         [Authorize]
         public ActionResult Edit(int id)

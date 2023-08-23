@@ -17,14 +17,12 @@
 
 else
 {
-  <h4>This Gathering has the following guests/Vendors:</h4>
+  <h4>This Gathering has the following guests:</h4>
   <ul>
     @foreach (GatheringUser join in Model.GatheringUsers)
     {
-      @if (join.User != null)
-      {
-        <li>User: @join.User.UserName</li>
-      }
+      <li>User: @join.User</li>
+
       @using (Html.BeginForm("RemoveGuest", "Gatherings"))
       {
         @Html.Hidden("joinId", @join.GatheringUserId)
@@ -33,6 +31,8 @@ else
     }
   </ul>
 }
+
+<hr>
 
 @if (@Model.GatheringVendors.Count == 0)
 {
@@ -55,7 +55,31 @@ else
       }
     }
   </ul>
+}
 
+<hr>
+
+@if (@Model.GatheringItems.Count == 0)
+{
+  <p>This gathering does not have any items yet.</p>
+}
+else
+{
+  <h4>This Gatherings has the following items:</h4>
+  <ul>
+    @foreach (GatheringItem join in Model.GatheringItems)
+    {
+      @if (join.Item != null)
+      {
+        <li>Tag: @join.Item.ItemName</li>
+      }
+      @using (Html.BeginForm("DeleteItem", "Gatherings"))
+      {
+        @Html.Hidden("joinId", @join.GatheringItemId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
 }
 
 <h3>@Html.DisplayNameFor(model => model.About):</h3>
@@ -64,6 +88,7 @@ else
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.GatheringId })</p>
 <p>@Html.ActionLink("Add a Vendor", "AddVendor", new { id = Model.GatheringId})</p>
-<p>@Html.ActionLink("Add a Activity", "AddActivity", new { id = Model.GatheringId })</p>
+<p>@Html.ActionLink("Add an Activity", "AddActivity", new { id = Model.GatheringId })</p>
+<p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.GatheringId })</p>
 <p>@Html.ActionLink("Edit Gathering", "Edit", new { id = Model.GatheringId })</p>
 <p>@Html.ActionLink("Delete Gathering", "Delete", new { id = Model.GatheringId })</p>

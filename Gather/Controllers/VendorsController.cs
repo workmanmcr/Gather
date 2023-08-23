@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Gather.Models;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gather.Controllers
 {
-  public class VendorController : Controller
+  public class VendorsController : Controller
   {
     private readonly GatherContext _db;
 
-    public VendorController(GatherContext db)
+    public VendorsController(GatherContext db)
     {
       _db = db;
     }
@@ -22,6 +22,7 @@ namespace Gather.Controllers
       return View(model);
     }
 
+    [Authorize]
     public ActionResult Create()
     {
       ViewBag.GatheringId = new SelectList(_db.Gatherings, "GatheringId", "Title");
@@ -51,7 +52,7 @@ namespace Gather.Controllers
       return View(thisVendor);
     }
 
-
+    [Authorize]
     public ActionResult Edit(int id)
     {
       ViewBag.GatheringId = new SelectList(_db.Gatherings, "GatheringId", "Title");
@@ -67,6 +68,7 @@ namespace Gather.Controllers
       return RedirectToAction("Details", new { id = vendor.VendorId });
     }
 
+    [Authorize]
     public ActionResult AddItem(int id)
     {
       var thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
@@ -88,7 +90,7 @@ namespace Gather.Controllers
       return RedirectToAction("Details", new { id = vendor.VendorId });
     }
 
-
+    [Authorize]
     public ActionResult Delete(int id)
     {
       Vendor thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
@@ -105,8 +107,8 @@ namespace Gather.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     [HttpPost]
-
     public ActionResult DeleteItem(int joinId)
     {
       VendorItem joinEntry = _db.VendorItems.FirstOrDefault(entry => entry.ItemId == joinId);

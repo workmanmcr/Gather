@@ -3,6 +3,7 @@ using System;
 using Gather.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gather.Migrations
 {
     [DbContext(typeof(GatherContext))]
-    partial class GatherContextModelSnapshot : ModelSnapshot
+    [Migration("20230823153925_ChangeAboutToString")]
+    partial class ChangeAboutToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -481,7 +483,7 @@ namespace Gather.Migrations
             modelBuilder.Entity("Gather.Models.GatheringItem", b =>
                 {
                     b.HasOne("Gather.Models.Gathering", "Gathering")
-                        .WithMany("GatheringItems")
+                        .WithMany("GatheringsItems")
                         .HasForeignKey("GatheringId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -676,11 +678,11 @@ namespace Gather.Migrations
                 {
                     b.Navigation("GatheringActivities");
 
-                    b.Navigation("GatheringItems");
-
                     b.Navigation("GatheringUsers");
 
                     b.Navigation("GatheringVendors");
+
+                    b.Navigation("GatheringsItems");
                 });
 
             modelBuilder.Entity("Gather.Models.Item", b =>

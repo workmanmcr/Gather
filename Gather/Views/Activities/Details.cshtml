@@ -28,7 +28,7 @@ else
             {
                 <li>User: @join.User.UserName</li>
             }
-            @using (Html.BeginForm("DeleteUser", "Activitys"))
+            @using (Html.BeginForm("DeleteUser", "Activities"))
             {
                 @Html.Hidden("joinId", @join.UserActivityId)
                 <input type="submit" value="Delete" />
@@ -38,3 +38,8 @@ else
 }
 
 <p>@Html.ActionLink("Back to activities", "Index")</p>
+<p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.ActivityId })</p>
+<p>@Html.ActionLink("Add a Vendor", "AddVendor", new { id = Model.ActivityId})</p>
+<p>@Html.ActionLink("Add a Gathering", "AddGathering", new { id = Model.ActivityId })</p>
+<p>@Html.ActionLink("Edit Activity", "Edit", new { id = Model.ActivityId })</p>
+<p>@Html.ActionLink("Delete Activity", "Delete", new { id = Model.ActivityId })</p>
