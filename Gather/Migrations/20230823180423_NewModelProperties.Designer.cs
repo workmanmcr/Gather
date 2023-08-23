@@ -3,6 +3,7 @@ using System;
 using Gather.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gather.Migrations
 {
     [DbContext(typeof(GatherContext))]
-    partial class GatherContextModelSnapshot : ModelSnapshot
+    [Migration("20230823180423_NewModelProperties")]
+    partial class NewModelProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,17 +256,17 @@ namespace Gather.Migrations
                     b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ApplicationUserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserId1")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("UserActivityId");
 
                     b.HasIndex("ActivityId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("UserActivities");
                 });
@@ -560,7 +562,7 @@ namespace Gather.Migrations
 
                     b.HasOne("Gather.Models.ApplicationUser", "User")
                         .WithMany("UserActivities")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Activity");
 
