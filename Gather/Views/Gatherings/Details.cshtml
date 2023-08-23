@@ -24,7 +24,6 @@ else
     <h4>This Gathering has the following guests:</h4>
     <ul>
     @foreach (GatheringUser join in Model.GatheringUsers)
-
     {
           <li>User: @join.User</li>
 
@@ -57,7 +56,7 @@ else
       @if (join.Vendor != null)
 
       {
-              <li>Vendor: @join.Vendor.VendorName</li>
+              <li>Vendor: @Html.ActionLink( @join.Vendor.VendorName, "Details", "Vendors", new { id = join.VendorId})</li>
       }
       @using (Html.BeginForm("RemoveVendor", "Gatherings"))
 

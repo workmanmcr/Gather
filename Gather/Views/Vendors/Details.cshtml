@@ -25,7 +25,7 @@ else
         {
             @if (join.Gathering != null)
             {
-                <li>Gathering: @join.Gathering.Title</li>
+                <li>Gathering: @Html.ActionLink(@join.Gathering.Title, "Details", "Gatherings", new { id = join.GatheringId})</li>
             }
             @using (Html.BeginForm("DeleteUser", "Activitys"))
             {
@@ -60,6 +60,7 @@ else
     </ul>
 }
 
+<p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.VendorId })</p>
 <p>@Html.ActionLink("Edit Vendor", "Edit", new { id = Model.VendorId })</p>
 <p>@Html.ActionLink("Delete Vendor", "Delete", new { id = Model.VendorId })</p>
 <p>@Html.ActionLink("Back to vendors", "Index")</p>
