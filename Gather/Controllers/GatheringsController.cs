@@ -137,7 +137,7 @@ namespace Gather.Controllers
         public ActionResult AddActivity(int id)
         {
             Gathering thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
-            ViewBag.ActivityId = new SelectList(_db.Activities, "ActivityId", "ActivityName");
+            ViewBag.ActivityId = new SelectList(_db.Activities, "ActivityId", "Name");
             return View(thisGathering);
         }
 
