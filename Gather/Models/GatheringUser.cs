@@ -6,7 +6,6 @@ namespace Gather.Models
   public class GatheringUser
   {
     public int GatheringUserId { get; set; }
-
     public Gathering Gathering { get; set; }
     public int GatheringId { get; set; }
     public ApplicationUser User { get; set; }
