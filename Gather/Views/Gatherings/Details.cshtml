@@ -93,7 +93,7 @@ else
 }
 else
 {
-  <h4>This Gat herings has the following items:</h4>
+  <h4>This Gatherings has the following items:</h4>
   <ul>
     @foreach (GatheringItem join in Model.GatheringItems)
 
@@ -101,7 +101,7 @@ else
       @if (join.Item != null)
 
       {
-        <li>Tag: @join.Item.ItemName</li>
+        <li>Item: @join.Item.ItemName</li>
       }
       @using (Html.BeginForm("RemoveItem", "Gatherings"))
 

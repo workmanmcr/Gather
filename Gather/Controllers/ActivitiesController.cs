@@ -43,7 +43,10 @@ namespace Gather.Controllers
 
         public ActionResult Details(int id)
         {
-            Activity thisActivity = _db.Activities.Include(a => a.UserActivities).ThenInclude(join => join.User).FirstOrDefault(activity => activity.ActivityId == id);
+            Activity thisActivity = _db.Activities
+            .Include(a => a.UserActivities)
+            .ThenInclude(join => join.User)
+            .FirstOrDefault(activity => activity.ActivityId == id);
             return View(thisActivity);
         }
 
