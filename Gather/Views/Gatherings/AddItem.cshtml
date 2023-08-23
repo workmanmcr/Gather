@@ -4,16 +4,19 @@
 
 @model Gather.Models.Gathering;
 
-<h2>Add Items</h2>
-<h4>Add items to this Gathering: @Html.DisplayFor(model => model.Title)</h4>
+<< HEAD
+<h2>Add Item</h2>
+<h4>Add Items to this Gathering: @Html.DisplayFor(model => model.Title)</h4>
+
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.GatheringId)
 
   @Html.Label("Select Item")
-  @Html.DropDownList("ItemId")
-  <input type="submit" value="Save" />
+  @Html.DropDownList("GatheringItemId")
+  <input type="submit" value="Save"/>
+
 }
 
 <p>@Html.ActionLink("Back to Gatherings", "Index")</p>

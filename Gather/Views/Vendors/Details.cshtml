@@ -60,4 +60,6 @@ else
     </ul>
 }
 
-<p>@Html.ActionLink("Back to activities", "Index")</p>
+<p>@Html.ActionLink("Edit Vendor", "Edit", new { id = Model.VendorId })</p>
+<p>@Html.ActionLink("Delete Vendor", "Delete", new { id = Model.VendorId })</p>
+<p>@Html.ActionLink("Back to vendors", "Index")</p>

@@ -46,7 +46,7 @@ else
     {
       @if (join.Vendor != null)
       {
-        <li>Tag: @join.Vendor.VendorName</li>
+        <li>Vendor: @join.Vendor.VendorName</li>
       }
       @using (Html.BeginForm("DeleteVendor", "Gatherings"))
       {
