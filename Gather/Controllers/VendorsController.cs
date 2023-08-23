@@ -44,12 +44,7 @@ namespace Gather.Controllers
 
     public ActionResult Details(int id)
     {
-      var thisVendor = _db.Vendors
-          .Include(vendor => vendor.GatheringVendors)
-              .ThenInclude(join => join.Gathering)
-              .Include(vendor => vendor.VendorItems)
-          .FirstOrDefault(vendor => vendor.VendorId == id);
-
+      var thisVendor = _db.Vendors.Include(vendor => vendor.GatheringVendors).ThenInclude(join => join.Gathering).Include(vendor => vendor.VendorItems).ThenInclude(join => join.Item).FirstOrDefault(vendor => vendor.VendorId == id);
       return View(thisVendor);
     }
 
