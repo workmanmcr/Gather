@@ -15,9 +15,10 @@ else
     <ul>
         @foreach (ApplicationUser v in Model)
         {
-            @* <li>@Html.ActionLink($"{v.GuestName}", "Details", new { id = v.GuestId })</li> *@
+            <li>@Html.ActionLink($"{v.GatheringUsers}", "Details", new { id = v.GatheringUsers })</li>
+            <li>@Html.ActionLink($"{v.GuestsItems}", "Details", new { id = v.GuestsItems })</li>
         }
     </ul>
 }
-<p>@Html.ActionLink("Create a guest", "Create")</p>
+
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
