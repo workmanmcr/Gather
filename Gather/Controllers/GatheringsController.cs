@@ -43,7 +43,7 @@ namespace Gather.Controllers
 
         public ActionResult Details(int id)
         {
-            Gathering thisGathering = _db.Gatherings.Include(gathering => gathering.GatheringUsers).ThenInclude(join => join.User).Include(gathering => gathering.GatheringVendors).ThenInclude(join => join.Vendor).Include(gathering => gathering.GatheringItems).ThenInclude(join => join.Item).FirstOrDefault(g => g.GatheringId == id);
+            Gathering thisGathering = _db.Gatherings.Include(gathering => gathering.GatheringUsers).ThenInclude(join => join.User).Include(gathering => gathering.GatheringVendors).ThenInclude(join => join.Vendor).Include(gathering => gathering.GatheringActivities).ThenInclude(join => join.Activity).Include(gathering => gathering.GatheringItems).ThenInclude(join => join.Item).FirstOrDefault(g => g.GatheringId == id);
             return View(thisGathering);
         }
         [Authorize]
