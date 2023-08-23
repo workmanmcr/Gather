@@ -51,7 +51,7 @@ else
             {
                 <li>Item: @join.Item.ItemName</li>
             }
-            @using (Html.BeginForm("DeleteUser", "Activitys"))
+            @using (Html.BeginForm("DeleteItem", "Vendors"))
             {
                 @Html.Hidden("joinId", @join.VendorItemId)
                 <input type="submit" value="Delete" />

@@ -17,7 +17,7 @@
 
 else
 {
-  <h4>This Gathering has the following guets/</h4>
+  <h4>This Gathering has the following guests/</h4>
   <ul>
     @foreach (GatheringUser join in Model.GatheringUsers)
     {
@@ -25,10 +25,10 @@ else
       {
         <li>User: @join.User.NormalizedUserName</li>
       }
-      @using (Html.BeginForm("DeleteUser", "Gatherings"))
+      @using (Html.BeginForm("RemoveGuest", "Gatherings"))
       {
         @Html.Hidden("joinId", @join.GatheringUserId)
-        <input type="submit" value="Delete" />
+        <input type="submit" value="Remove" />
       }
     }
   </ul>
@@ -48,10 +48,10 @@ else
       {
         <li>Vendor: @join.Vendor.VendorName</li>
       }
-      @using (Html.BeginForm("DeleteVendor", "Gatherings"))
+      @using (Html.BeginForm("RemoveVendor", "Gatherings"))
       {
         @Html.Hidden("joinId", @join.GatheringVendorId)
-        <input type="submit" value="Delete" />
+        <input type="submit" value="Remove" />
       }
     }
   </ul>

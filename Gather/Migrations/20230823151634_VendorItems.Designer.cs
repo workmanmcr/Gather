@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gather.Migrations
 {
     [DbContext(typeof(GatherContext))]
-    [Migration("20230822224308_TimeandDate")]
-    partial class TimeandDate
+    [Migration("20230823151634_VendorItems")]
+    partial class VendorItems
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -149,9 +149,9 @@ namespace Gather.Migrations
                     b.ToTable("GatheringActivities");
                 });
 
-            modelBuilder.Entity("Gather.Models.GatheringItems", b =>
+            modelBuilder.Entity("Gather.Models.GatheringItem", b =>
                 {
-                    b.Property<int>("GatheringItemsId")
+                    b.Property<int>("GatheringItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -161,7 +161,7 @@ namespace Gather.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.HasKey("GatheringItemsId");
+                    b.HasKey("GatheringItemId");
 
                     b.HasIndex("GatheringId");
 
@@ -215,26 +215,23 @@ namespace Gather.Migrations
                     b.ToTable("GatheringVendors");
                 });
 
-            modelBuilder.Entity("Gather.Models.GuestItems", b =>
+            modelBuilder.Entity("Gather.Models.GuestItem", b =>
                 {
-                    b.Property<int>("GuestItemsId")
+                    b.Property<int>("GuestItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
-                    b.HasKey("GuestItemsId");
+                    b.HasKey("GuestItemId");
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("GuestItems");
                 });
@@ -486,7 +483,7 @@ namespace Gather.Migrations
                     b.Navigation("Gathering");
                 });
 
-            modelBuilder.Entity("Gather.Models.GatheringItems", b =>
+            modelBuilder.Entity("Gather.Models.GatheringItem", b =>
                 {
                     b.HasOne("Gather.Models.Gathering", "Gathering")
                         .WithMany("GatheringsItems")
@@ -541,7 +538,7 @@ namespace Gather.Migrations
                     b.Navigation("Vendor");
                 });
 
-            modelBuilder.Entity("Gather.Models.GuestItems", b =>
+            modelBuilder.Entity("Gather.Models.GuestItem", b =>
                 {
                     b.HasOne("Gather.Models.Item", "Item")
                         .WithMany("GuestItems")
@@ -551,7 +548,7 @@ namespace Gather.Migrations
 
                     b.HasOne("Gather.Models.ApplicationUser", "User")
                         .WithMany("GuestsItems")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Item");
 

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gather.Migrations
 {
     [DbContext(typeof(GatherContext))]
-    [Migration("20230822181927_GuestItems")]
-    partial class GuestItems
+    [Migration("20230823150422_Initialmigration")]
+    partial class Initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,10 +111,13 @@ namespace Gather.Migrations
                     b.Property<int>("About")
                         .HasColumnType("int");
 
+                    b.Property<int>("Date")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("TimeDate")
+                    b.Property<int>("Time")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -146,9 +149,9 @@ namespace Gather.Migrations
                     b.ToTable("GatheringActivities");
                 });
 
-            modelBuilder.Entity("Gather.Models.GatheringItems", b =>
+            modelBuilder.Entity("Gather.Models.GatheringItem", b =>
                 {
-                    b.Property<int>("GatheringItemsId")
+                    b.Property<int>("GatheringItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -158,7 +161,7 @@ namespace Gather.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.HasKey("GatheringItemsId");
+                    b.HasKey("GatheringItemId");
 
                     b.HasIndex("GatheringId");
 
@@ -212,26 +215,23 @@ namespace Gather.Migrations
                     b.ToTable("GatheringVendors");
                 });
 
-            modelBuilder.Entity("Gather.Models.GuestItems", b =>
+            modelBuilder.Entity("Gather.Models.GuestItem", b =>
                 {
-                    b.Property<int>("GuestItemsId")
+                    b.Property<int>("GuestItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
-                    b.HasKey("GuestItemsId");
+                    b.HasKey("GuestItemId");
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("GuestItems");
                 });
@@ -315,9 +315,9 @@ namespace Gather.Migrations
                     b.ToTable("Vendors");
                 });
 
-            modelBuilder.Entity("Gather.Models.VendorItems", b =>
+            modelBuilder.Entity("Gather.Models.VendorItem", b =>
                 {
-                    b.Property<int>("VendorItemsId")
+                    b.Property<int>("VendorItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -327,7 +327,7 @@ namespace Gather.Migrations
                     b.Property<int>("VendorId")
                         .HasColumnType("int");
 
-                    b.HasKey("VendorItemsId");
+                    b.HasKey("VendorItemId");
 
                     b.HasIndex("ItemId");
 
@@ -483,7 +483,7 @@ namespace Gather.Migrations
                     b.Navigation("Gathering");
                 });
 
-            modelBuilder.Entity("Gather.Models.GatheringItems", b =>
+            modelBuilder.Entity("Gather.Models.GatheringItem", b =>
                 {
                     b.HasOne("Gather.Models.Gathering", "Gathering")
                         .WithMany("GatheringsItems")
@@ -538,7 +538,7 @@ namespace Gather.Migrations
                     b.Navigation("Vendor");
                 });
 
-            modelBuilder.Entity("Gather.Models.GuestItems", b =>
+            modelBuilder.Entity("Gather.Models.GuestItem", b =>
                 {
                     b.HasOne("Gather.Models.Item", "Item")
                         .WithMany("GuestItems")
@@ -548,7 +548,7 @@ namespace Gather.Migrations
 
                     b.HasOne("Gather.Models.ApplicationUser", "User")
                         .WithMany("GuestsItems")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Item");
 
@@ -589,7 +589,7 @@ namespace Gather.Migrations
                     b.Navigation("Vendor");
                 });
 
-            modelBuilder.Entity("Gather.Models.VendorItems", b =>
+            modelBuilder.Entity("Gather.Models.VendorItem", b =>
                 {
                     b.HasOne("Gather.Models.Item", "Item")
                         .WithMany("VendorItems")
@@ -598,7 +598,7 @@ namespace Gather.Migrations
                         .IsRequired();
 
                     b.HasOne("Gather.Models.Vendor", "Vendor")
-                        .WithMany("VendorsItems")
+                        .WithMany("VendorItems")
                         .HasForeignKey("VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -703,7 +703,7 @@ namespace Gather.Migrations
 
                     b.Navigation("UserVendors");
 
-                    b.Navigation("VendorsItems");
+                    b.Navigation("VendorItems");
                 });
 #pragma warning restore 612, 618
         }
