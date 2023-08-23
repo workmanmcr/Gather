@@ -9,7 +9,7 @@ namespace Gather.Models
     public string Title { get; set; }
     public string Location { get; set; }
 
-    public int DateTime { get; set; }
+    public DateTime DateTime { get; set; }
     public int About { get; set; }
 
 
