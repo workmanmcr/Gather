@@ -1,0 +1,45 @@
+@{
+    Layout = "_Layout";
+}
+
+@using Gather.Models
+@model Gather.Models.Activity
+
+<h2>Guests:</h2>
+
+<hr>
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+<h3>@Html.DisplayNameFor(model => model.Description):</h3>
+<p>@Html.DisplayFor(model => model.Description)</p>
+
+@if (@Model.UserActivities.Count == 0)
+{
+    <p>this activity does not have any guests yet.</p>
+}
+
+else
+{
+    <h4>This Activity has the following guests:</h4>
+    <ul>
+        @foreach (UserActivity join in Model.UserActivities)
+        {
+            @if (join.User != null)
+            {
+                <li>User: @join.User.UserName</li>
+            }
+            @using (Html.BeginForm("DeleteUser", "Activities"))
+            {
+                @Html.Hidden("joinId", @join.UserActivityId)
+                <input type="submit" value="Delete" />
+            }
+        }
+    </ul>
+}
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Back to activities", "Index")</p>
+    <p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.ActivityId })</p>
+    <p>@Html.ActionLink("Edit Activity", "Edit", new { id = Model.ActivityId })</p>
+    <p>@Html.ActionLink("Delete Activity", "Delete", new { id = Model.ActivityId })</p>
+</div>

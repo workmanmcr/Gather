@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Gather.Models.Item
+
+<h4>Add your Item!</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.ItemName)
+  @Html.TextBoxFor(model => model.ItemName)
+
+  <input type="submit" value="add new Item" />
+}
+<hr>
+<div id="links">
+  <p>@Html.ActionLink("Show all Items", "Index")</p>
+</div>

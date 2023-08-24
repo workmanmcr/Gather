@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+@using Gather.Models
+
+<h1>Gatherings for @User.Identity.Name</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3> No Gatherings have been Planned yet. </h3>
+}
+else
+{
+  <ul>
+    @foreach (Gathering g in Model)
+    {
+      <li>@Html.ActionLink($"{g.Title}", "Details", new { id = g.GatheringId })</li>
+    }
+  </ul>
+}
+<hr>
+<div id="links">
+  <p>@Html.ActionLink("Create Gathering", "Create")</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

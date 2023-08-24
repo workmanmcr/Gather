@@ -1,0 +1,23 @@
+@{
+    Layout = "_Layout";
+}
+
+@using Gather.Models
+@model Gather.Models.Item
+
+<h2>Edit ingredient: @Html.DisplayFor(model => model.ItemName)</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ItemId)
+
+    @Html.LabelFor(model => model.ItemName)
+    @Html.EditorFor(model => model.ItemName)
+
+    <input type="submit" value="Save" />
+}
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Show all Items", "Index")</p>
+    <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

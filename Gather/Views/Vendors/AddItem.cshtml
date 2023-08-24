@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Gather.Models.Vendor;
+
+<h2>Add Items</h2>
+<h4>Add items to this vendor: @Html.DisplayFor(model => model.VendorName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.VendorId)
+
+  @Html.Label("Select Item")
+  @Html.DropDownList("ItemId")
+  <input type="submit" value="Save" />
+}
+<hr>
+<div id="links">
+  <p>@Html.ActionLink("Back to Vendors", "Index")</p>
+</div>

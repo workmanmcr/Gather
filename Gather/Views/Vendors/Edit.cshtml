@@ -1,0 +1,27 @@
+@{
+    Layout = "_Layout";
+}
+
+@using Gather.Models
+@model Gather.Models.Vendor
+
+<h4>Edit your vendorVendor!</h4>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.VendorId)
+
+    @Html.LabelFor(model => model.VendorName)
+    <br>
+    @Html.TextBoxFor(model => model.VendorName)
+    <br>
+    <br>
+    @Html.LabelFor(model => model.About)
+    <br>
+    @Html.TextAreaFor(model => model.About, new { cols=80, rows=10 })
+
+    <input type="submit" value="add new vendor" />
+}
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Show all activities", "Index")</p>
+</div>

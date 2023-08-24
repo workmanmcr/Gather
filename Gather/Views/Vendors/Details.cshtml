@@ -1,0 +1,68 @@
+@{
+    Layout = "_Layout";
+}
+
+@using Gather.Models
+@model Gather.Models.Vendor
+
+<h2>@Html.DisplayNameFor(model => model.VendorName): @Html.DisplayFor(model => model.VendorName)</h2>
+
+<hr>
+
+<h3>@Html.DisplayNameFor(model => model.About):</h3>
+<p>@Html.DisplayFor(model => model.About)</p>
+
+@if (@Model.GatheringVendors.Count == 0)
+{
+    <p>this vendor is not registered to any gathering yet.</p>
+}
+
+else
+{
+    <h4>This vendor will be at the following gatherings:</h4>
+    <ul>
+        @foreach (GatheringVendor join in Model.GatheringVendors)
+        {
+            @if (join.Gathering != null)
+            {
+                <li>Gathering: @Html.ActionLink(@join.Gathering.Title, "Details", "Gatherings", new { id = join.GatheringId})</li>
+            }
+            @using (Html.BeginForm("DeleteUser", "Activitys"))
+            {
+                @Html.Hidden("joinId", @join.GatheringVendorId)
+                <input type="submit" value="Delete" />
+            }
+        }
+    </ul>
+}
+
+@if (@Model.VendorItems.Count == 0)
+{
+    <p>this vendor does not have any items yet.</p>
+}
+
+else
+{
+    <h4>This vendor carries the following items:</h4>
+    <ul>
+        @foreach (VendorItem join in Model.VendorItems)
+        {
+            @if (join.Item != null)
+            {
+                <li>Item: @join.Item.ItemName</li>
+            }
+            @using (Html.BeginForm("DeleteItem", "Vendors"))
+            {
+                @Html.Hidden("joinId", @join.VendorItemId)
+                <input type="submit" value="Delete" />
+            }
+        }
+    </ul>
+}
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.VendorId })</p>
+    <p>@Html.ActionLink("Edit Vendor", "Edit", new { id = Model.VendorId })</p>
+    <p>@Html.ActionLink("Delete Vendor", "Delete", new { id = Model.VendorId })</p>
+    <p>@Html.ActionLink("Back to vendors", "Index")</p>
+</div>

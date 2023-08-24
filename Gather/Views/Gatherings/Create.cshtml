@@ -1,0 +1,44 @@
+@{
+    Layout = "_Layout";
+}
+
+@model Gather.Models.Gathering
+
+<h4>Create your gathering!</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Title)
+    <br>
+    @Html.TextBoxFor(model => model.Title)
+    <br>
+    <br>
+    @Html.LabelFor(model => model.DateTime)
+    <br>
+    @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "datepicker" } })
+    <br>
+    <br>
+    @Html.LabelFor(model => model.Location)
+    <br>
+    @Html.TextBoxFor(model => model.Location)
+    <br>
+    <br>
+    @Html.LabelFor(model => model.About)
+    <br>
+    @Html.TextBoxFor(model => model.About)
+    
+    <input type="submit" value="add new gathering" />
+}
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Show all gatherings", "Index")</p>
+</div>
+
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+        });
+    });
+</script>

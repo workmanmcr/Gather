@@ -1,0 +1,145 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: "magic";
+  color: rgb(255, 163, 35);
+  background-color: rgb(23, 0, 39);
+  margin-bottom: 60px;
+}
+
+#links {
+  vertical-align: middle;
+  text-align: center;
+  color: rgb(255, 163, 35);
+  
+}
+
+#homelinks {
+  vertical-align: middle;
+  position: absolute;
+  left: 34%;
+  bottom: 75px;
+  font-size: x-large;
+}
+
+@keyframes flicker {
+    
+  0%, 18%, 20%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 7px rgb(237, 165, 63),
+      0 0 10px rgb(255, 163, 35),
+      0 0 13px rgb(228, 136, 7),
+      0 0 16px rgb(205, 176, 32),
+      0 0 19px rgb(255, 200, 0),
+      0 0 21px rgb(210, 102, 178),
+      0 0 24px rgb(210, 102, 178),
+      0 0 27px rgb(207, 82, 170),
+      0 0 30px rgb(148, 46, 167),
+      0 0 33px rgb(81, 31, 114);
+  } 
+  16%, 19%, 52% {        
+    text-shadow:
+      0 0 1px rgb(237, 165, 63),
+      0 0 2px rgb(255, 163, 35),
+      0 0 3px rgb(228, 136, 7),
+      0 0 4px rgb(205, 176, 32),
+      0 0 5px rgb(255, 200, 0),
+      0 0 6px rgb(210, 102, 178),
+      0 0 7px rgb(210, 102, 178),
+      0 0 8px rgb(207, 82, 170),
+      0 0 9px rgb(148, 46, 167),
+      0 0 10px rgb(81, 31, 114);
+  }
+  8%, 21%, 59%, 99% {
+    text-shadow:
+        0 0 10px rgb(237, 165, 63),
+        0 0 13px rgb(255, 163, 35),
+        0 0 16px rgb(228, 136, 7),
+        0 0 19px rgb(205, 176, 32),
+        0 0 22px rgb(255, 200, 0),
+        0 0 24px rgb(210, 102, 178),
+        0 0 27px rgb(210, 102, 178),
+        0 0 30px rgb(207, 82, 170),
+        0 0 33px rgb(148, 46, 167),
+        0 0 36px rgb(81, 31, 114);
+  }
+}
+
+#homepageh1 {
+  animation: flicker .75s infinite alternate;
+  vertical-align: middle;
+  position: absolute;
+  left: 21%;
+  top: 79px;
+}
+
+img{
+  background-size:100%;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  height:100%;
+  width:100%;
+  animation: boxflicker 1.5s infinite alternate;
+  border-radius: 50px; 
+}
+
+@keyframes boxflicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    box-shadow:
+      0 0 7px rgb(237, 165, 63),
+      0 0 10px rgb(255, 163, 35),
+      0 0 13px rgb(228, 136, 7),
+      0 0 16px rgb(205, 176, 32),
+      0 0 19px rgb(255, 200, 0),
+      0 0 21px rgb(210, 102, 178),
+      0 0 24px rgb(210, 102, 178),
+      0 0 27px rgb(207, 82, 170),
+      0 0 30px rgb(148, 46, 167),
+      0 0 33px rgb(81, 31, 114);
+  } 
+  16%, 52% {        
+    box-shadow:
+      0 0 1px rgb(237, 165, 63),
+      0 0 2px rgb(255, 163, 35),
+      0 0 3px rgb(228, 136, 7),
+      0 0 4px rgb(205, 176, 32),
+      0 0 5px rgb(255, 200, 0),
+      0 0 6px rgb(210, 102, 178),
+      0 0 7px rgb(210, 102, 178),
+      0 0 8px rgb(207, 82, 170),
+      0 0 9px rgb(148, 46, 167),
+      0 0 10px rgb(81, 31, 114);
+  }
+  21%, 99% {
+    box-shadow:
+        0 0 10px rgb(237, 165, 63),
+        0 0 13px rgb(255, 163, 35),
+        0 0 16px rgb(228, 136, 7),
+        0 0 19px rgb(205, 176, 32),
+        0 0 22px rgb(255, 200, 0),
+        0 0 24px rgb(210, 102, 178),
+        0 0 27px rgb(210, 102, 178),
+        0 0 30px rgb(207, 82, 170),
+        0 0 33px rgb(148, 46, 167),
+        0 0 36px rgb(81, 31, 114);
+  }
+}
+
+@font-face {
+  font-family: magic;
+  src: url("../Font/MAGIC.TTF");
+}

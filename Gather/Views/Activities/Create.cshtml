@@ -1,0 +1,25 @@
+@{
+    Layout = "_Layout";
+}
+
+@model Gather.Models.Activity
+
+<h4>Add your activity!</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name)
+    <br>
+    @Html.TextBoxFor(model => model.Name)
+    <br>
+    <br>
+    @Html.LabelFor(model => model.Description)
+    <br>
+    @Html.TextAreaFor(model => model.Description, new { cols=80, rows=10 })
+    <br>
+    <br>
+    <input type="submit" value="add new activity" />
+}
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Show all activities", "Index")</p>
+</div>
