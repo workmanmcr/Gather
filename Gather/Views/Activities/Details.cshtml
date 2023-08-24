@@ -26,9 +26,9 @@ else
         {
             @if (join.User != null)
             {
-                <li>User: @join.User.UserName</li>
+                <li>User: @join.User</li>
             }
-            @using (Html.BeginForm("DeleteUser", "Activities"))
+            @using (Html.BeginForm("RemoveGuest", "Activities"))
             {
                 @Html.Hidden("joinId", @join.UserActivityId)
                 <input type="submit" value="Delete" />

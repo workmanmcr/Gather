@@ -43,10 +43,7 @@ namespace Gather.Controllers
 
         public ActionResult Details(int id)
         {
-            Activity thisActivity = _db.Activities
-            .Include(a => a.UserActivities)
-            .ThenInclude(join => join.User)
-            .FirstOrDefault(activity => activity.ActivityId == id);
+            Activity thisActivity = _db.Activities.Include(a => a.UserActivities).ThenInclude(join => join.User).FirstOrDefault(activity => activity.ActivityId == id);
             return View(thisActivity);
         }
 
@@ -54,23 +51,33 @@ namespace Gather.Controllers
         public ActionResult AddGuest(int id)
         {
             Activity thisActivity = _db.Activities.FirstOrDefault(activity => activity.ActivityId == id);
-            ViewBag.ApplicationUserId = new SelectList(_db.Users, "ApplicationUserId");
+            ViewBag.ApplicationUserId = new SelectList(_db.Users, "Id", "UserName");
             return View(thisActivity);
         }
 
         [HttpPost]
-        public ActionResult AddGuest(Activity activity, int userId)
+        public ActionResult AddGuest(Activity activity, string applicationUserId)
         {
 #nullable enable
-            UserActivity? joinEntity = _db.UserActivities.FirstOrDefault(join => (join.ActivityId == activity.ActivityId && join.ApplicationUserId == userId));
+            UserActivity? joinEntity = _db.UserActivities.FirstOrDefault(join => (join.ActivityId == activity.ActivityId && join.ApplicationUserId == applicationUserId));
 #nullable disable
 
             if (joinEntity == null && activity.ActivityId != 0)
             {
-                _db.UserActivities.Add(new UserActivity() { ActivityId = activity.ActivityId, ApplicationUserId = userId });
+                _db.UserActivities.Add(new UserActivity() { ActivityId = activity.ActivityId, ApplicationUserId = applicationUserId });
                 _db.SaveChanges();
             }
             return RedirectToAction("Details", new { id = activity.ActivityId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult RemoveGuest(int joinId)
+        {
+            UserActivity joinEntry = _db.UserActivities.FirstOrDefault(entry => entry.UserActivityId == joinId);
+            _db.UserActivities.Remove(joinEntry);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [Authorize]
