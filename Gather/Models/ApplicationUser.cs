@@ -7,6 +7,6 @@ namespace Gather.Models
     public List<GatheringUser> GatheringUsers { get; }
     public List<UserActivity> UserActivities { get; }
     public List<UserVendor> UserVendors { get; }
-    public List<GuestItem> GuestsItems { get; }
+    public List<GuestItem> GuestItems { get; }
   }
 }

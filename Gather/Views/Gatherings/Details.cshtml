@@ -116,10 +116,13 @@ else
 <h3>@Html.DisplayNameFor(model => model.About):</h3>
 <p>@Html.DisplayFor(model => model.About)</p>
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.GatheringId })</p>
-<p>@Html.ActionLink("Add a Vendor", "AddVendor", new { id = Model.GatheringId})</p>
-<p>@Html.ActionLink("Add an Activity", "AddActivity", new { id = Model.GatheringId })</p>
-<p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.GatheringId })</p>
-<p>@Html.ActionLink("Edit Gathering", "Edit", new { id = Model.GatheringId })</p>
-<p>@Html.ActionLink("Delete Gathering", "Delete", new { id = Model.GatheringId })</p>
+<hr>
+<div id="links">
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+  <p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.GatheringId })</p>
+  <p>@Html.ActionLink("Add a Vendor", "AddVendor", new { id = Model.GatheringId})</p>
+  <p>@Html.ActionLink("Add an Activity", "AddActivity", new { id = Model.GatheringId })</p>
+  <p>@Html.ActionLink("Add an Item", "AddItem", new { id = Model.GatheringId })</p>
+  <p>@Html.ActionLink("Edit Gathering", "Edit", new { id = Model.GatheringId })</p>
+  <p>@Html.ActionLink("Delete Gathering", "Delete", new { id = Model.GatheringId })</p>
+</div>

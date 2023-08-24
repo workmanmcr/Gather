@@ -7,14 +7,14 @@ namespace Gather.Controllers
   {
     private readonly GatherContext _db;
 
-        public GuestsController(GatherContext db)
-        {
-            _db = db;
-        }
+    public GuestsController(GatherContext db)
+    {
+      _db = db;
+    }
     public ActionResult Index()
     {
-        List<ApplicationUser> model = _db.AspNetUsers.ToList();
-        return View(model);
+      List<ApplicationUser> model = _db.AspNetUsers.ToList();
+      return View(model);
     }
   }
 }

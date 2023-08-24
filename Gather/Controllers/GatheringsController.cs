@@ -51,20 +51,20 @@ namespace Gather.Controllers
         public ActionResult AddGuest(int id)
         {
             Gathering thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
-            ViewBag.ApplicationUserId = new SelectList(_db.Users, "ApplicationUserId");
+            ViewBag.ApplicationUserId = new SelectList(_db.Users, "Id", "UserName");
             return View(thisGathering);
         }
 
         [HttpPost]
-        public ActionResult AddGuest(Gathering gathering, int userId)
+        public ActionResult AddGuest(Gathering gathering, string ApplicationUserId)
         {
 #nullable enable
-            GatheringUser? joinEntity = _db.GatheringUsers.FirstOrDefault(join => (join.GatheringId == gathering.GatheringId && join.ApplicationUserId == userId));
+            GatheringUser? joinEntity = _db.GatheringUsers.FirstOrDefault(join => (join.GatheringId == gathering.GatheringId && join.ApplicationUserId == ApplicationUserId));
 #nullable disable
 
             if (joinEntity == null && gathering.GatheringId != 0)
             {
-                _db.GatheringUsers.Add(new GatheringUser() { GatheringId = gathering.GatheringId, ApplicationUserId = userId });
+                _db.GatheringUsers.Add(new GatheringUser() { GatheringId = gathering.GatheringId, ApplicationUserId = ApplicationUserId });
                 _db.SaveChanges();
             }
             return RedirectToAction("Details", new { id = gathering.GatheringId });
@@ -79,6 +79,7 @@ namespace Gather.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         [Authorize]
         public ActionResult AddVendor(int id)
         {
@@ -135,6 +136,16 @@ namespace Gather.Controllers
         }
 
         [Authorize]
+        [HttpPost]
+        public ActionResult RemoveItem(int joinId)
+        {
+            GatheringItem joinEntry = _db.GatheringItems.FirstOrDefault(entry => entry.GatheringItemId == joinId);
+            _db.GatheringItems.Remove(joinEntry);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
         public ActionResult AddActivity(int id)
         {
             Gathering thisGathering = _db.Gatherings.FirstOrDefault(gathering => gathering.GatheringId == id);
@@ -154,6 +165,16 @@ namespace Gather.Controllers
                 _db.SaveChanges();
             }
             return RedirectToAction("Details", new { id = gathering.GatheringId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult RemoveActivity(int joinId)
+        {
+            GatheringActivity joinEntry = _db.GatheringActivities.FirstOrDefault(entry => entry.GatheringActivityId == joinId);
+            _db.GatheringActivities.Remove(joinEntry);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [Authorize]

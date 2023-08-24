@@ -36,8 +36,10 @@ else
         }
     </ul>
 }
-
-<p>@Html.ActionLink("Back to activities", "Index")</p>
-<p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.ActivityId })</p>
-<p>@Html.ActionLink("Edit Activity", "Edit", new { id = Model.ActivityId })</p>
-<p>@Html.ActionLink("Delete Activity", "Delete", new { id = Model.ActivityId })</p>
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Back to activities", "Index")</p>
+    <p>@Html.ActionLink("Add a Guest", "AddGuest", new { id = Model.ActivityId })</p>
+    <p>@Html.ActionLink("Edit Activity", "Edit", new { id = Model.ActivityId })</p>
+    <p>@Html.ActionLink("Delete Activity", "Delete", new { id = Model.ActivityId })</p>
+</div>

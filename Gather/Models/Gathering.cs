@@ -10,7 +10,7 @@ namespace Gather.Models
     public string Location { get; set; }
 
     public DateTime DateTime { get; set; }
-    public String About { get; set; }
+    public string About { get; set; }
 
 
     public List<GatheringUser> GatheringUsers { get; }

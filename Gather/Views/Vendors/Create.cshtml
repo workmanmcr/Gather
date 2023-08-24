@@ -8,12 +8,18 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.VendorName)
+    <br>
     @Html.TextBoxFor(model => model.VendorName)
-
+    <br>
+    <br>
     @Html.LabelFor(model => model.About)
+    <br>
     @Html.TextAreaFor(model => model.About, new { cols=80, rows=10 })
-
+    <br>
+    <br>
     <input type="submit" value="add new vendor" />
 }
-
-<p>@Html.ActionLink("Show all vendors", "Index")</p>
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Show all vendors", "Index")</p>
+</div>

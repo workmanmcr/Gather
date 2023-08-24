@@ -15,5 +15,8 @@
     <li>@Html.ActionLink($"{item.ItemName}", "Details", new { id = item.ItemId })</li>
   }
 </ul>
-<p>@Html.ActionLink("Add item", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<hr>
+<div id="links">
+  <p>@Html.ActionLink("Add item", "Create")</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

@@ -8,20 +8,30 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Title)
+    <br>
     @Html.TextBoxFor(model => model.Title)
-
+    <br>
+    <br>
     @Html.LabelFor(model => model.DateTime)
+    <br>
     @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "datepicker" } })
-
+    <br>
+    <br>
     @Html.LabelFor(model => model.Location)
+    <br>
     @Html.TextBoxFor(model => model.Location)
-
+    <br>
+    <br>
     @Html.LabelFor(model => model.About)
+    <br>
     @Html.TextBoxFor(model => model.About)
-
+    
     <input type="submit" value="add new gathering" />
 }
-<p>@Html.ActionLink("Show all gatherings", "Index")</p>
+<hr>
+<div id="links">
+    <p>@Html.ActionLink("Show all gatherings", "Index")</p>
+</div>
 
 <script>
     $(function () {

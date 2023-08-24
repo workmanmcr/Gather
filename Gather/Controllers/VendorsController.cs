@@ -67,7 +67,7 @@ namespace Gather.Controllers
     [Authorize]
     public ActionResult AddItem(int id)
     {
-      var thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
+      Vendor thisVendor = _db.Vendors.FirstOrDefault(vendor => vendor.VendorId == id);
       ViewBag.ItemId = new SelectList(_db.Items, "ItemId", "ItemName");
       return View(thisVendor);
     }
